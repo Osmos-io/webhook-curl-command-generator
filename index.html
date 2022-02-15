@@ -1,1 +1,60 @@
-it works!
+<html>
+	<head>
+		<title>Osmos Webhook Curl Generator</title>
+		<style>
+			html {
+				font-family: 'Courier New', Courier, monospace;
+			}
+			#container {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+			}
+			#left {
+				border: 1px solid gray;
+				width: 45%;
+			}
+			#right {
+				border: 1px solid gray;
+				width: 45%;
+			}
+			input, textarea {
+				width: 95%;
+			}
+		</style>
+	</head>
+	<body>
+		<p id="toptext">Welcome to the Osmos Webhook Curl Command Generator (OWCCG).
+		</p>
+		<div id="container">
+			<div id="left">
+				JSON data
+				<br/>
+					<textarea id="data"> </textarea>
+					<hr/>
+						Webhook URL
+						<br/>
+							<input id="webhookUrl"></input>
+						<button id="submit">Submit</button>
+					</div>
+					<div id="right">
+						<div id="generated-command">
+						</div>
+					</div>
+				</div>
+			</body>
+
+			<script>
+			function handleDataSubmit() {
+				const data = JSON.parse(document.querySelector("#data").value);
+				const webhookUrl = document.querySelector("#webhookUrl").value;
+				if (!data || !webhookUrl) {
+					alert("Please provide a value for both the webhook URL and the JSON data.");
+					return;
+				}
+				let command = "/opt/homebrew/Cellar/curl/7.80.0_1/bin/curl -X POST --data " + JSON.stringify(JSON.stringify(data)) + " " +   webhookUrl;
+				document.querySelector("#generated-command").innerHTML = command;
+			}
+			document.querySelector("#submit").addEventListener('click', handleDataSubmit)
+		</script>
+		</html>
