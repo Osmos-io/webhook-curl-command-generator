@@ -52,7 +52,7 @@
 					alert("Please provide a value for both the webhook URL and the JSON data.");
 					return;
 				}
-				let command = "/opt/homebrew/Cellar/curl/7.80.0_1/bin/curl -X POST --data " + JSON.stringify(JSON.stringify(data)) + " " +   webhookUrl;
+				let command = "curl -X POST --data " + JSON.stringify(JSON.stringify(data)) + " " +   webhookUrl;
 				document.querySelector("#generated-command").innerHTML = command;
 			}
 			document.querySelector("#submit").addEventListener('click', handleDataSubmit)
